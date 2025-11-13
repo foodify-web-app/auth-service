@@ -1,10 +1,10 @@
 // services/auth.service.js
 import bcrypt from "bcryptjs";
-import {redis} from "common-utils";
+import {getRedis} from "common-utils";
 import userModel from "../models/userModel.js";
 import { createAccessToken, createToken, verifyJwt } from "../utils/jwt.js";
 import { deleteTokenBySessionId, getTokensBySessionId } from "./refreshToken.service.js";
-
+const redis = getRedis();
 // ---- LOGIN ----
 export const login = async (email, password) => {
     const user = await userModel.findOne({ email });

@@ -1,4 +1,7 @@
-import { redis, redisPublisher, redisSubscriber } from "common-utils";
+import { getRedis, getRedisPublisher, getRedisSubscriber } from "common-utils";
+const redis = getRedis();
+const redisPublisher = getRedisPublisher();
+const redisSubscriber = getRedisSubscriber();
 
 export const getRefreshTokenPayload = (data) => {
     const { sessionId, userId, token, expiresAt } = data;
