@@ -11,12 +11,8 @@ RUN npm install
 # 4. Copy source code
 COPY . .
 
-ENV JWT_SECRET=novaisnow18
-ENV REDIS_HOST=redis
-ENV REDIS_PORT=6379
-
 # 5. Expose port (match your service port)
-EXPOSE 4002
+EXPOSE 4000
 
 # 6. Start the app
 CMD ["npm", "start"]
