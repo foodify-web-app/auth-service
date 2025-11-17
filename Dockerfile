@@ -1,19 +1,22 @@
-# 1. Base image
 FROM node:18-alpine
 
-# 2. Set working directory
-WORKDIR /
+WORKDIR /app/auth-service
 
-# 3. Copy package.json & install deps
-COPY package*.json ./
-RUN npm install 
+# COPY ONLY the package.json first (important!)
+COPY auth-service/package*.json ./
 
-# 4. Copy source code
-COPY . .
+# Also copy common-utils package.json to install dependencies correctly
+COPY common-utils/package*.json ./common-utils/
 
-# 5. Expose port (match your service port)
+# Now copy actual service code
+COPY auth-service .
+
+# Copy common-utils (actual code)
+COPY common-utils ./common-utils
+
+# Install dependencies (this prevents idealTree errors)
+RUN npm install
+
 EXPOSE 4000
 
-# 6. Start the app
 CMD ["npm", "start"]
-
