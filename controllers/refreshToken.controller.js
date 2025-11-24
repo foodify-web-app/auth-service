@@ -7,7 +7,7 @@ export const createRefreshToken = async (req, res) => {
 
         // Basic validation
         if (!userId || !sessionId || !token || !expiresAt) {
-            return res.status(400).json({ success: false, message: "Missing required fields" });
+            return res.status(401).json({ success: false, message: "Missing required fields" });
         }
 
         await createOrUpdateToken({ userId, sessionId, token, expiresAt });
@@ -82,7 +82,7 @@ export const getRefreshTokenById = async (req, res) => {
     } catch (error) {
         console.log(error);
         if (error.kind === 'ObjectId') {
-            return res.status(400).json({ success: false, message: "Invalid token ID format" });
+            return res.status(401).json({ success: false, message: "Invalid token ID format" });
         }
         res.status(500).json({ success: false, message: "Server Error" });
     }
@@ -113,7 +113,7 @@ export const updateRefreshToken = async (req, res) => {
     } catch (error) {
         console.log(error);
         if (error.kind === 'ObjectId') {
-            return res.status(400).json({ success: false, message: "Invalid token ID format" });
+            return res.status(401).json({ success: false, message: "Invalid token ID format" });
         }
         res.status(500).json({ success: false, message: "Server Error" });
     }
@@ -136,7 +136,7 @@ export const deleteRefreshToken = async (req, res) => {
     } catch (error) {
         console.log(error);
         if (error.kind === 'ObjectId') {
-            return res.status(400).json({ success: false, message: "Invalid token ID format" });
+            return res.status(401).json({ success: false, message: "Invalid token ID format" });
         }
         res.status(500).json({ success: false, message: "Server Error" });
     }
