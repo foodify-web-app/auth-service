@@ -7,7 +7,7 @@ import { deleteTokenBySessionId, getTokensBySessionId } from "./refreshToken.ser
 const redis = getRedis();
 // ---- LOGIN ----
 export const login = async (email, password) => {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email, isDeleted: false });
     if (!user) throw new Error("User does not exist");
 
     const isMatch = await bcrypt.compare(password, user.password);
